@@ -4,10 +4,12 @@ using namespace std;
 class myString{
     char* str;
     unsigned long length;
+    static int objects;
 public:
     myString(){
         str = new char[80];
         length = 0;
+        objects++;
     }
     myString(int size){
         length = size;
@@ -101,7 +103,13 @@ public:
         else if (length > b.length) return 1;
         else return -2;
     }
+    static void ShowObjects();
 };
+
+void myString::ShowObjects(){
+    cout << objects;
+}
+int myString::objects = 0U;
 
 int main() {
     
