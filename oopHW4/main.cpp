@@ -22,6 +22,27 @@ public:
     ~myString(){
         delete[] str;
     }
+    myString(myString&& obj){
+        str = obj.str;
+        obj.str = nullptr;
+        length = obj.length;
+    }
+    myString& operator=(myString&& obj){
+        if (!(this == &obj)){
+            if (obj.str == nullptr){
+                str = nullptr;
+                length = obj.length;
+                return *this;
+                }
+            if (str != nullptr){
+                delete[] str;
+            }
+            str = new char[obj.length + 1];
+            strcpy(str, obj.str);
+            length = obj.length;
+            }
+        return *this;
+    }
     void Init(){
         char buf[80];
         cout << "Enter a string: ";
@@ -112,5 +133,10 @@ void myString::ShowObjects(){
 int myString::objects = 0U;
 
 int main() {
-    
+    myString s;
+    s.Init();
+    myString d;
+    d.Init();
+    s = d;
+    s.Print();
 }
