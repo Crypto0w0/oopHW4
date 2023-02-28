@@ -32,14 +32,16 @@ public:
             if (obj.str == nullptr){
                 str = nullptr;
                 length = obj.length;
+                obj.length = 0;
                 return *this;
                 }
             if (str != nullptr){
                 delete[] str;
             }
-            str = new char[obj.length + 1];
-            strcpy(str, obj.str);
+            str = obj.str;
+            obj.str = nullptr;
             length = obj.length;
+            obj.length = 0;
             }
         return *this;
     }
