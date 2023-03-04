@@ -45,6 +45,13 @@ public:
             }
         return *this;
     }
+    myString(initializer_list<char> obj){
+        length = 0;
+        for (auto el : obj){
+            str[length] = el;
+            length++;
+        }
+    }
     void Init(){
         char buf[80];
         cout << "Enter a string: ";
@@ -141,4 +148,8 @@ int main() {
     d.Init();
     s = d;
     s.Print();
+    
+    char c[] = {'H', 'e', 'l', 'l', 'o'};
+    myString st(c);
+    st.Print();
 }
