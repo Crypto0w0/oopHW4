@@ -55,6 +55,7 @@ public:
     }
     myString(initializer_list<char> obj){
         length = 0;
+        str = new char[80];
         for (auto el : obj){
             str[length] = el;
             length++;
