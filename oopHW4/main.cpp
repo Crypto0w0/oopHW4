@@ -16,23 +16,31 @@ public:
         str = new char[length + 1];
     }
     myString(char* userstr){
-        strcpy(str, userstr);
+        str = userstr;
         length = strlen(str);
     }
     ~myString(){
         delete[] str;
+    }
+    myString(myString& obj){
+        str = obj.str;
+        length = obj.length;
     }
     myString(myString&& obj){
         str = obj.str;
         obj.str = nullptr;
         length = obj.length;
     }
+    myString& operator=(myString& obj){
+        str = obj.str;
+        length = obj.length;
+        return *this;
+    }
     myString& operator=(myString&& obj){
         if (!(this == &obj)){
             if (obj.str == nullptr){
                 str = nullptr;
                 length = obj.length;
-                obj.length = 0;
                 return *this;
                 }
             if (str != nullptr){
@@ -149,7 +157,6 @@ int main() {
     s = d;
     s.Print();
     
-    char c[] = {'H', 'e', 'l', 'l', 'o'};
-    myString st(c);
+    myString st {'H', 'e', 'l', 'l', 'o'};
     st.Print();
 }
